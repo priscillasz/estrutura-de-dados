@@ -45,12 +45,42 @@ public class Vetor {
         return false;
     }
 
-    // buscar elemento em uma determinada posição
+    // #7 add elemento em qualquer posição
+    public boolean adiciona(int posicao, String elemento) {
+        // verifica se a posição é válida ou não
+        if (!(posicao >= 0 && posicao < tamanho)) {
+            throw new IllegalArgumentException("Posição inválida.");
+        }
+
+        // mover todos os elementos
+        for (int i = this.tamanho-1; i >= posicao; i--) {
+            this.elementos[i+1] = this.elementos[i];
+        }
+
+        // atribuir o elemento à posição
+        this.elementos[posicao] = elemento;
+        this.tamanho++;
+        
+        return true;
+    }
+
+    // #5 buscar elemento em uma determinada posição
     public String busca(int posicao) {
         if (!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalArgumentException("Posição inválida.");
         }
         return this.elementos[posicao];
+    }
+
+    // #6 verificar se elemento existe no vetor
+    public int busca(String elemento) {
+        // busca sequencial
+        for (int i = 0; i < this.tamanho; i++) {
+            if (this.elementos[i].equals(elemento)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     // getTamanho
