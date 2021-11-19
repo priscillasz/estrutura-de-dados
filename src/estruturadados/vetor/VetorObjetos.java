@@ -1,42 +1,17 @@
 package estruturadados.vetor;
 
-import java.util.Arrays;
-
-public class Vetor {
-
-    private String[] elementos;
+public class VetorObjetos {
+    private Object[] elementos;
     private int tamanho;
 
     // construtor
-    public Vetor(int capacidade) {
-        this.elementos = new String[capacidade];
+    public VetorObjetos(int capacidade) {
+        this.elementos = new Object[capacidade];
         this.tamanho = 0;
     }
 
-    // ADICIONAR UM ELEMENTO AO VETOR
-    // método 1: adicionar um elemento ao vetor
-    /*public void adiciona(String elemento) {
-        for(int i = 0; i < this.elementos.length; i++) {
-            if (this.elementos[i] == null) {
-                this.elementos[i] = elemento;
-                break;
-            }
-        }
-    }*/
-
-    // método 2
-    /*public void adiciona(String elemento) throws Exception {
-        if (this.tamanho < this.elementos.length) {
-            this.elementos[this.tamanho] = elemento;
-            this.tamanho++;
-        } else {
-            throw new Exception("Vetor já está cheio. Não é possível adicionar mais elementos.");
-
-        }
-    }*/
-
     // método 3
-    public boolean adiciona(String elemento) {
+    public boolean adiciona(Object elemento) {
         this.aumentaCapacidade();
 
         if (this.tamanho < this.elementos.length) {
@@ -48,7 +23,7 @@ public class Vetor {
     }
 
     // #7 add elemento em qualquer posição
-    public boolean adiciona(int posicao, String elemento) {
+    public boolean adiciona(int posicao, Object elemento) {
         // verifica se a posição é válida ou não
         if (!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalArgumentException("Posição inválida.");
@@ -72,7 +47,7 @@ public class Vetor {
     // private pq vai ser utilizado apenas internamente na classe Vetor
     private void aumentaCapacidade(){ // só é executado quando o tamanho do vetor atinge a capacidade
         if (this.tamanho == this.elementos.length) {
-            String[] elementosNovos = new String[this.elementos.length * 2];
+            Object[] elementosNovos = new Object[this.elementos.length * 2];
             for (int i = 0; i < this.elementos.length; i++) {
                 elementosNovos[i] = this.elementos[i];
             }
@@ -81,7 +56,7 @@ public class Vetor {
     }
 
     // #5 buscar elemento em uma determinada posição
-    public String busca(int posicao) {
+    public Object busca(int posicao) {
         if (!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalArgumentException("Posição inválida.");
         }
@@ -89,7 +64,7 @@ public class Vetor {
     }
 
     // #6 verificar se elemento existe no vetor
-    public int busca(String elemento) {
+    public int busca(Object elemento) {
         // busca sequencial
         for (int i = 0; i < this.tamanho; i++) {
             if (this.elementos[i].equals(elemento)) {
