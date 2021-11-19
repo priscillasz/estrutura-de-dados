@@ -69,8 +69,12 @@ public class Lista<T> { // T significa class Type
         }
     }
 
+    public T obtem(int posicao) {
+        return this.busca(posicao);
+    }
+
     // #5 buscar elemento em uma determinada posição
-    public Object busca(int posicao) {
+    public T busca(int posicao) {
         if (!(posicao >= 0 && posicao < tamanho)) {
             throw new IllegalArgumentException("Posição inválida.");
         }
@@ -88,6 +92,28 @@ public class Lista<T> { // T significa class Type
         return -1;
     }
 
+    // ultimo indice - ex2
+    public int ultimoIndice(T elemento) {
+        for (int i = this.tamanho-1; i >= 0; i--) {
+            if (this.elementos[i].equals(elemento)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // contém - ex1
+    public boolean contem(T elemento) {
+        return busca(elemento) > -1; // >= 0
+
+        /* ou
+        int pos = busca(elemento);
+        if (pos > -1) {
+            return true;
+        }
+        return false;*/
+    }
+
     // #9 remover elemento do vetor através da posição que ele está
     public void remove(int posicao) {
         if (!(posicao >= 0 && posicao < tamanho)) {
@@ -99,6 +125,30 @@ public class Lista<T> { // T significa class Type
         }
 
         this.tamanho--;
+    }
+
+    // ex3
+    public void remove(T elemento) {
+        int pos = this.busca(elemento);
+        if (pos > -1) {
+            this.remove(pos);
+        }
+    }
+
+    // ex5 - remover todos os elementos (clear)
+    public void limpar() {
+        // as três opções são válidas
+        // opção 1
+        // this.elementos = (T[]) new Object[this.elementos.length];
+
+        // opção 2 -> resetar o tamanho
+        // this.tamanho = 0;
+
+        // opção 3
+        for (int i = 0; i < this.tamanho; i++) {
+            this.elementos[i] = null;
+        }
+        this.tamanho = 0;
     }
 
     // getTamanho
