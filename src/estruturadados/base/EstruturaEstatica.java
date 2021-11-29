@@ -32,7 +32,7 @@ public class EstruturaEstatica<T> {
     // add elemento em qualquer posição
     protected boolean adiciona(int posicao, T elemento) {
         // verifica se a posição é válida ou não
-        if (!(posicao >= 0 && posicao < tamanho)) {
+        if (posicao < 0 || posicao > tamanho) { // tava !(posicao >= 0 && posicao < tamanho) antes
             throw new IllegalArgumentException("Posição inválida.");
         }
 
@@ -48,6 +48,17 @@ public class EstruturaEstatica<T> {
         this.tamanho++;
 
         return true;
+    }
+
+    // remove
+    protected void remove(int posicao) {
+        if (!(posicao >= 0 && posicao < tamanho)) {
+            throw new IllegalArgumentException("Posição inválida");
+        }
+        for (int i = posicao; i < tamanho-1; i++) {
+            elementos[i] = elementos[i+1];
+        }
+        tamanho--;
     }
 
     //
